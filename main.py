@@ -1,3 +1,4 @@
+import logging
 import json
 import requests
 
@@ -9,6 +10,7 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 
+logger = logging.getLogger(__name__)
 
 # Using the REST-Api of Joplin: https://joplinapp.org/api/references/rest_api/
 class JoplinExtension(Extension):
@@ -76,7 +78,8 @@ class KeywordQueryEventListener(EventListener):
             return None
 
         notebooks = extension.get_notebooks()
-
+        logging.error(notebooks)
+        
         # Sort by note count. The notebook with the most notes should be on top.
         notebooks.sort(key=lambda x: x['note_count'], reverse=True)
 
