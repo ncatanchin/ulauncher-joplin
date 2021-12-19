@@ -81,13 +81,13 @@ class KeywordQueryEventListener(EventListener):
         logging.error(notebooks)
         
         # Sort by note count. The notebook with the most notes should be on top.
-        notebooks.sort(key=lambda x: x['note_count'], reverse=True)
+        # notebooks.sort(key=lambda x: x['note_count'], reverse=True)
 
         results = []
 
         print(extension.limit)
 
-        for notebook in notebooks[:extension.limit]:
+        for notebook in notebooks["items"][:extension.limit]:
             data = {
                 'text': query,
                 'type': keyword,
