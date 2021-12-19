@@ -33,8 +33,9 @@ class JoplinExtension(Extension):
             'parent_id': note['notebookId']
         }))
 
-    def get_notebooks(self):
-        response = requests.get('http://localhost:41184/folders?token=5f99742799fac18bff82a173cfca2b6ea509f37b6b05dd6b47c2e4d6c7ce76fa8399ee4025325e87a44fdf2b781c0d631e25146fc1a010f6b1ebffb34ab7652f')
+    def get_notebooks(self, query):
+        # response = requests.get('http://localhost:41184/folders?token=5f99742799fac18bff82a173cfca2b6ea509f37b6b05dd6b47c2e4d6c7ce76fa8399ee4025325e87a44fdf2b781c0d631e25146fc1a010f6b1ebffb34ab7652f')
+        response = requests.get('http://localhost:41184/search?query=-*&type=folder&token=5f99742799fac18bff82a173cfca2b6ea509f37b6b05dd6b47c2e4d6c7ce76fa8399ee4025325e87a44fdf2b781c0d631e25146fc1a010f6b1ebffb34ab7652f')
         return json.loads(response.content)
 
 
@@ -77,7 +78,7 @@ class KeywordQueryEventListener(EventListener):
         if query == None:
             return None
 
-        notebooks = extension.get_notebooks()
+        notebooks = extension.get_notebooks(keyword)
         logging.error(notebooks)
         
         # Sort by note count. The notebook with the most notes should be on top.
