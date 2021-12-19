@@ -79,7 +79,7 @@ class KeywordQueryEventListener(EventListener):
         if query == None:
             return None
 
-        notebooks = extension.get_notebooks(keyword)
+        notebooks = extension.get_notebooks(query)
         logging.error(notebooks)
         
         # Sort by note count. The notebook with the most notes should be on top.
